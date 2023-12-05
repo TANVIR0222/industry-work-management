@@ -1,5 +1,6 @@
 package com.example.to_do.Registration
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -53,6 +54,7 @@ class SingInActivity : AppCompatActivity() {
     }
     // forget password dialog
 
+    @SuppressLint("SuspiciousIndentation")
     private fun showForgetpasswordDialog() {
 
         val dialog = ForgetPasswordDialogBinding.inflate(LayoutInflater.from(this@SingInActivity))
@@ -61,6 +63,11 @@ class SingInActivity : AppCompatActivity() {
             .create()
             alertDialog.show()
         dialog.Femail.requestFocus()
+
+        dialog.Bs.setOnClickListener {
+            startActivity(Intent(this,SingInActivity::class.java))
+            finish()
+        }
 
         dialog.FP.setOnClickListener {
 

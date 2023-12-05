@@ -11,7 +11,6 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.example.to_do.BossMainActivity
 import com.example.to_do.databinding.AccountDialogeBinding
 import com.example.to_do.databinding.ActivitySingUpBinding
 import com.example.to_do.utile.Users
@@ -191,7 +190,7 @@ class SingUpActivity : AppCompatActivity() {
 
                     // object
                     val boss =
-                        Users(saveUsertype, uid, name, password, email, downloadUrl.toString())
+                        Users(userType = saveUsertype, userId = uid, userName = name, userEmail =  email, userPassword = password, userImage = downloadUrl.toString())
                     // save data
                     db.child(uid).setValue(boss).await()
 

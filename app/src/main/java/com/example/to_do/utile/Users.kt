@@ -1,13 +1,15 @@
 package com.example.to_do.utile
 
-data class Users(
+import java.util.UUID
 
-    val userType: String ? = null,
-    val bossId : String ?= null,
-    val bossName : String ?= null,
-    val bossEmail : String ?= null,
-    val bossPassword : String ?= null,
-    val bossImage : String ?= null
+data class Users(
+    var id : String = UUID.randomUUID().toString(),
+    var userType: String ? = null,
+    var userId : String ?= null,
+    var userName : String ?= null,
+    var userEmail : String ?= null,
+    var userPassword : String ?= null,
+    var userImage : String ?= null
 
 
 )

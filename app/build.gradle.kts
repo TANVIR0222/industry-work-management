@@ -61,6 +61,8 @@ dependencies {
     implementation ("de.hdodenhof:circleimageview:3.1.0")
     //glide
     implementation ("com.github.bumptech.glide:glide:4.16.0")
+    annotationProcessor("com.github.bumptech.glide:annotations:4.16.0")
+
 
     //retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
