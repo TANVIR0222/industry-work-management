@@ -9,12 +9,9 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.to_do.Registration.SingInActivity
 import com.example.to_do.databinding.FragmentEmployeeBinding
-import com.example.to_do.utile.BaseFragment
 import com.example.to_do.utile.Users
-import com.example.to_do.utile.utile
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -25,7 +22,7 @@ class EmployeeFragment :Fragment(){
 
     lateinit var binding: FragmentEmployeeBinding
 
-    //  lateinit var adapter: EmployeeAdapter
+      private lateinit var employeeAdapter: EmployeeAdapter
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -47,41 +44,44 @@ class EmployeeFragment :Fragment(){
             }
         }
 
+        seeEmployee()
 
-
-//        setData()
-
+        showAllEmployee()
         return binding.root
     }
 
-//    private fun setData() {
-//        FirebaseDatabase.getInstance().getReference("User").addValueEventListener(object : ValueEventListener {
-//            override fun onDataChange(snapshot: DataSnapshot) {
-//
-//                val empList = arrayListOf<Users>()
-//
-//                for (sn in snapshot.children) {
-//
-//                    val current = sn.getValue(Users::class.java)
-//
-//                    if (current?.userType == "Employee"){
-//
-//                        empList.add(current)
-//                    }
-//                }
-//
-//                adapter = EmployeeAdapter(empList)
-//                binding.Rcv.adapter = adapter
-//
-//            }
-//
-//            override fun onCancelled(error: DatabaseError) {
-//                TODO("Not yet implemented")
-//            }
-//
-//        })
-//
-//    }
+    private fun showAllEmployee() {
+        FirebaseDatabase.getInstance().getReference("Users").addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+                val employeeList = arrayListOf<Users>()
+                for (sn in snapshot.children){
+                    val currentEmployee = sn.getValue(Users::class.java)
+                    if (currentEmployee?.userType =="Employee"){
+                        employeeList.add(currentEmployee)
+
+                    }
+
+                }
+                employeeAdapter.differ.submitList(employeeList)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
+    }
+
+    private fun seeEmployee() {
+        employeeAdapter = EmployeeAdapter()
+        binding.Rcv.apply {
+
+            layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL ,false)
+
+            adapter = employeeAdapter
+
+        }
+    }
 
 
     private fun showLogOutDialog() {

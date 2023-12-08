@@ -10,27 +10,40 @@ import com.bumptech.glide.Glide
 import com.example.to_do.databinding.ItemRcvBinding
 import com.example.to_do.utile.Users
 
-class EmployeeAdapter(var postList: List<Users>) :RecyclerView.Adapter<EmployeeAdapter.EmployeeViewHolder> (){
+class EmployeeAdapter  :RecyclerView.Adapter<EmployeeAdapter.EmployeeViewHolder> (){
+    class  EmployeeViewHolder(val binding: ItemRcvBinding):ViewHolder(binding.root)
 
-    class  EmployeeViewHolder(val binding: ItemRcvBinding):RecyclerView.ViewHolder(binding.root)
+    val diffUtil  = object :DiffUtil.ItemCallback<Users>(){
+        override fun areItemsTheSame(oldItem: Users, newItem: Users): Boolean {
 
+            return oldItem.id == newItem.id
+
+        }
+
+        override fun areContentsTheSame(oldItem: Users, newItem: Users): Boolean {
+            return oldItem == newItem
+        }
+
+    }
+    val differ = AsyncListDiffer (this,diffUtil)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EmployeeViewHolder {
+
         return EmployeeViewHolder(ItemRcvBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+
+
     }
 
     override fun getItemCount(): Int {
-        return postList.size
+
+        return differ.currentList.size
     }
 
     override fun onBindViewHolder(holder: EmployeeViewHolder, position: Int) {
-        val post= postList[position]
-
+        val currentData = differ.currentList[position]
         holder.binding.apply {
-            Glide.with(holder.itemView).load(post.userImage).into(profileImage)
-            nameEmployee.text = post.userName
+            Glide.with(holder.itemView).load(currentData.userImage).into(profileImage)
+            nameEmployee.text=currentData.userName
         }
-
-
 
     }
 }
