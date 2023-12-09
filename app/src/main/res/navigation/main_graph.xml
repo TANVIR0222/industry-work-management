@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/employeeFragment"
-        android:name="com.example.to_do.EmployeeFragment"
+        android:name="com.example.to_do.View.EmployeeFragment"
         android:label="fragment_employee"
         tools:layout="@layout/fragment_employee" >
         <action
@@ -16,16 +16,19 @@
     </fragment>
     <fragment
         android:id="@+id/workFragment"
-        android:name="com.example.to_do.WorkFragment"
+        android:name="com.example.to_do.View.WorkFragment"
         android:label="fragment_work"
         tools:layout="@layout/fragment_work" >
         <action
             android:id="@+id/action_workFragment_to_assingWorkFragment"
             app:destination="@id/assingWorkFragment" />
+        <argument
+            android:name="employeeData"
+            app:argType="com.example.to_do.utile.Users" />
     </fragment>
     <fragment
         android:id="@+id/assingWorkFragment"
-        android:name="com.example.to_do.AssingWorkFragment"
+        android:name="com.example.to_do.View.AssingWorkFragment"
         android:label="fragment_assing_work"
         tools:layout="@layout/fragment_assing_work" />
 </navigation>

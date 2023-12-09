@@ -1,12 +1,15 @@
-package com.example.to_do
+package com.example.to_do.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
+import com.example.to_do.R
+import com.example.to_do.View.EmployeeFragment
 import com.example.to_do.databinding.ItemRcvBinding
 import com.example.to_do.utile.Users
 
@@ -43,6 +46,9 @@ class EmployeeAdapter  :RecyclerView.Adapter<EmployeeAdapter.EmployeeViewHolder>
         holder.binding.apply {
             Glide.with(holder.itemView).load(currentData.userImage).into(profileImage)
             nameEmployee.text=currentData.userName
+        }
+        holder.itemView.setOnClickListener {
+           Navigation.findNavController(it).navigate(R.id.action_employeeFragment_to_workFragment)
         }
 
     }

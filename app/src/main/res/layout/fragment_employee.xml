@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".EmployeeFragment">
+    tools:context=".View.EmployeeFragment">
 
 
    <com.google.android.material.appbar.MaterialToolbar
@@ -23,8 +23,7 @@
    <androidx.recyclerview.widget.RecyclerView
        android:id="@+id/Rcv"
        android:layout_width="match_parent"
-       android:layout_height="@dimen/_0sdp"
-       tools:listitem="@layout/item_rcv"
+       android:layout_height="@dimen/_509sdp"
        app:layout_constraintBottom_toBottomOf="parent"
        app:layout_constraintEnd_toEndOf="parent"
        app:layout_constraintStart_toStartOf="parent"

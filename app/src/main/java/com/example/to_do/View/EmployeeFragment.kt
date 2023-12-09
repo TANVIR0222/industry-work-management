@@ -1,24 +1,27 @@
-package com.example.to_do
+package com.example.to_do.View
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.to_do.R
 import com.example.to_do.Registration.SingInActivity
+import com.example.to_do.adapter.EmployeeAdapter
 import com.example.to_do.databinding.FragmentEmployeeBinding
 import com.example.to_do.utile.Users
+import com.example.to_do.utile.utile
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class EmployeeFragment :Fragment(){
+class EmployeeFragment : Fragment(){
 
     lateinit var binding: FragmentEmployeeBinding
 
@@ -35,7 +38,7 @@ class EmployeeFragment :Fragment(){
             tolber.setOnMenuItemClickListener{
 
                 when(it.itemId){
-                    R.id.logOut_emp-> {
+                    R.id.logOut_emp -> {
                         showLogOutDialog()
                         true
                     }
@@ -51,7 +54,9 @@ class EmployeeFragment :Fragment(){
     }
 
     private fun showAllEmployee() {
-        FirebaseDatabase.getInstance().getReference("Users").addValueEventListener(object :ValueEventListener{
+        utile.showDialog(requireContext())
+        FirebaseDatabase.getInstance()
+            .getReference("Users").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
 
                 val employeeList = arrayListOf<Users>()
@@ -64,10 +69,14 @@ class EmployeeFragment :Fragment(){
 
                 }
                 employeeAdapter.differ.submitList(employeeList)
+                utile.hideDialog()
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+                utile.apply {
+                    hideDialog()
+                    showToast(requireContext(), error.message)
+                }
             }
         })
     }
@@ -76,7 +85,8 @@ class EmployeeFragment :Fragment(){
         employeeAdapter = EmployeeAdapter()
         binding.Rcv.apply {
 
-            layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL ,false)
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
             adapter = employeeAdapter
 
@@ -92,7 +102,7 @@ class EmployeeFragment :Fragment(){
             .setPositiveButton("yes"){ _,_->// lemda
 
                 FirebaseAuth.getInstance().signOut()
-                startActivity(Intent(requireContext() , SingInActivity::class.java))
+                startActivity(Intent(requireContext(), SingInActivity::class.java))
                 findNavController().popBackStack()
 
             }
@@ -104,9 +114,7 @@ class EmployeeFragment :Fragment(){
             .show()
             .setCancelable(false)
 
-
     }
 
 
 }
-

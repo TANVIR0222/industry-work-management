@@ -6,10 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
-import com.example.to_do.EmployeeAdapter
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 
 abstract class BaseFragment<vB : ViewBinding>(
     private val bindingInflater: (inflater: LayoutInflater) -> vB

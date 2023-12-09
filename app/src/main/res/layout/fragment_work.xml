@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".WorkFragment">
+    tools:context=".View.WorkFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/tolber"
@@ -15,20 +15,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/tv_menu"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="Employee Work"
+        app:title="Employee Work">
+
+    </com.google.android.material.appbar.MaterialToolbar>
 
 
-
-        />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/next"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:src="@drawable/baseline_navigate_next_24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tolber" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
